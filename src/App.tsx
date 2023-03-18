@@ -1,11 +1,12 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import MessageBoard from "./messageBoard";
 import Welcome from "./welcome";
 import AllPosts from "./allPosts";
 import PostView from "./postView";
+import NavBar from "./navBar";
 
 const router = createBrowserRouter([
   {
@@ -18,32 +19,35 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":pageNumber",
-            element: <AllPosts />
+            element: <AllPosts />,
           },
           {
             path: "post/:postId",
-            element: <PostView />
-          }
-        ]
+            element: <PostView />,
+          },
+        ],
       },
       {
         path: "welcome",
-        element: <Welcome />
-      }
-    ]
-  }
-])
+        element: <Welcome />,
+      },
+    ],
+  },
+]);
 
 function App() {
   const [count, setCount] = useState(0);
 
-  return (
-    <RouterProvider router={router}  />
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
 
 function Layout() {
-  return <h2>Layout</h2>;
+  return (
+    <>
+      <NavBar />
+      <Outlet />
+    </>
+  );
 }
