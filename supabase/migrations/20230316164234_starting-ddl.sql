@@ -18,10 +18,10 @@ USING (true);
 CREATE POLICY "users can insert" ON "public"."user_profiles"
 AS PERMISSIVE FOR INSERT
 TO public
-WITH CHECK (auth.uid() = user.id);
+WITH CHECK (auth.uid() = user_id);
 
 CREATE POLICY "owners can update" ON "public"."user_profiles"
 AS PERMISSIVE FOR UPDATE
-to public
-USING (auth.uid() = user.id)
-WITH CHECK (auth.uid() = user.id);
+TO public
+USING (auth.uid() = user_id)
+WITH CHECK (auth.uid() = user_id);
